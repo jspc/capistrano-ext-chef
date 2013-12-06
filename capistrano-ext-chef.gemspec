@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = 'Capistrano extension to run chef solo stuffs'
   spec.license = 'Simplified BSD'
 
-  spec.add_dependency 'capistrano', '>=2.0.0'
+  spec.add_dependency 'capistrano', '>=2.11.0'
   spec.add_dependency 'capistrano-ext'
   spec.add_dependency 'knife-solo'
 
