@@ -13,9 +13,7 @@ Gem::Specification.new do |spec|
   spec.license = 'Simplified BSD'
 
   spec.add_dependency 'capistrano', '>=2.11.0'
-  spec.add_dependency 'net-ssh', '2.3.0'
   spec.add_dependency 'capistrano-ext'
-  spec.add_dependency 'knife-solo'
 
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'capistrano-spec'
