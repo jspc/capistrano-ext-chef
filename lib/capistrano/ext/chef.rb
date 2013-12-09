@@ -29,11 +29,13 @@ module Capistrano
             key       = fetch(:chef_key, nil)
 
             if bundle
-              puts "cd #{chef_dir} && bundle install"
+              run_locally "cd #{chef_dir} && bundle install"
             end
             fetch(:chef_hosts, []).each do |h|
-              puts "cd #{chef_dir} && #{Chef.set_shell(bundle)} knife bootstrap -x #{user} #{Chef.key_string(key)} -d #{bootstrap} #{h}"
+              # Because capistrano is a bit bad at outputting fron run_locally() we use system. This makes me sad
+              system "cd #{chef_dir} && #{Chef.set_shell(bundle)} knife bootstrap -x #{user} #{Chef.key_string(key)} -d #{bootstrap} #{h}"
             end
+            chef.provision
           end
           
           desc 'Provision out a chef node'
@@ -46,7 +48,7 @@ module Capistrano
             key       = fetch(:chef_key, nil)
             
             fetch(:chef_hosts, []).each do |h|
-              puts "cd #{chef_dir} && #{Chef.set_shell(bundle)} knife solo cook #{user}@#{h} #{Chef.key_string(key)}"
+              system "cd #{chef_dir} && #{Chef.set_shell(bundle)} knife solo cook #{user}@#{h} #{Chef.key_string(key)}"
             end
           end # chef:provision
         end # chef
